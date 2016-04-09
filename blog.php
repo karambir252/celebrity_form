@@ -8,15 +8,7 @@
 	</head>
 	<body>
 		<div class="page">
-			<div class="header">
-				<a href="index.html" id="logo"><img src="images/logo.png" alt=""/></a>
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li class="selected"><a href="blog.html">Blog</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</div>
+			<?php include('header.php') ?>
 			<div class="body">
 				<h3>Celebrities will write their experience here</h3>
 				<ul class="paging">
@@ -47,20 +39,7 @@
 					<li><a href="#">>></a></li>
 				</ul>
 			</div>
-			<div class="footer">
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-				<p>Celebrity Form</p>
-				<div class="connect">
-					<a href="#" id="facebook">facebook</a>
-					<a href="#" id="twitter">twitter</a>
-					<a href="#" id="vimeo">vimeo</a>
-				</div>
-			</div>
+			<?php include('footer.php') ?>
 		</div>
 	</body>
 </html>  

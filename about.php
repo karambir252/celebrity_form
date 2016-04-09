@@ -9,15 +9,7 @@
 	</head>
 	<body>
 		<div class="page">
-			<div class="header">
-				<a href="index.html" id="logo"><img src="images/logo.png" alt=""/></a>
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li class="selected"><a href="about.html">About</a></li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-			</div>
+			<?php include('header.php') ?>
 			<div class="body">
 				
 				<h3>What we do?</h3>
@@ -28,23 +20,19 @@
 				
 				<h3>Bugs</h3>
 				<p>If you encounter any bug please report that at <a href="#">report bug</a>.</p>
-					
+				
+                <br />
+                <h3>Contact us</h3>
+				<p>Mobile: +91-8888888888</p>
+
+				<h3>Address</h3>
+				<p>Delhi Technological University <br />
+					Shahbad Daultpur <br />
+					Main Bawana Road <br />
+				</p>
 				
 			</div>
-			<div class="footer">
-				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="contact.html">Contact</a></li>
-				</ul>
-				<p>Celebrity Form</p>
-				<div class="connect">
-					<a href="#" id="facebook">facebook</a>
-					<a href="#" id="twitter">twitter</a>
-					<a href="#" id="vimeo">vimeo</a>
-				</div>
-			</div>
+			<?php include('footer.php')?>
 		</div>
 	</body>
 </html>  
