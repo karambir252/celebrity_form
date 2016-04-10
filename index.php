@@ -1,5 +1,6 @@
-<!DOCTYPE html>
 
+<?php session_start(); ?>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -17,7 +18,12 @@
 						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.
 						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.
 						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.</p>
-					<input type="button" value="Ask Question" onClick=""/>
+                    <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){ ?>
+					    <input type="button" value="Ask Question" onClick=""/>
+                    <?php }else{ ?>
+                        <input type="button" value="Log in" onclick="window.location.href = 'login.php'" />
+                    <?php } ?>
+                    
 				</div>
 				<ul class="blog">
 					<li>
