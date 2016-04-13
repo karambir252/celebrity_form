@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 
 <?php
-    if($_POST['email'] != ''){
+    if(isset($_POST['email']) && $_POST['email'] != ''){
         $_SESSION['loggedin'] = TRUE;
         $_SESSION['user_id'] = 123;
         $_SESSION['user_name'] = 'karambir';

@@ -18,11 +18,13 @@
 						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.
 						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.
 						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.</p>
-                    <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){ ?>
-					    <input type="button" value="Ask Question" onClick=""/>
-                    <?php }else{ ?>
-                        <input type="button" value="Log in" onclick="window.location.href = 'login.php'" />
-                    <?php } ?>
+                    <?php 
+                        if(isLoggedIn()){
+					        echo '<input type="button" value="Ask Question" onClick=""/>';
+                        }else{
+                            echo '<a href="login.php"><input type="button" value="Log in"/></a>';
+                        }
+                    ?>
                     
 				</div>
 				<ul class="blog">
