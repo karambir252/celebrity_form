@@ -12,7 +12,7 @@ body{
 /*------------------------- Header ------------------------*/ 
 .header{
 	background:url(../images/bg-navigation.jpg) no-repeat center 90px;
-	width:940px;
+	width:1024px;
 	margin:0 auto;
 	height:105px;
 	padding:36px 10px 0;
@@ -33,7 +33,7 @@ body{
 }
 .header ul li{
 	float:left;
-	margin:0 0 0 63px;
+	margin:0 0 0 24px;
 }
 .header ul li.selected a,.header ul li a:hover{
 	color:#f78117;
@@ -48,7 +48,7 @@ body{
 
 /*------------------------- Body ------------------------*/ 
 .body{
-	width:940px;
+	width:1024px;
 	margin:0 auto;
 	padding:0 10px;
 	overflow:hidden;
@@ -57,8 +57,8 @@ body{
 /****************************** index **********************/
 
 .body div#featured{
-	background:url(../images/next_celebrity.jpg) no-repeat right top;
-	height:448px;
+	//background:url(../images/next_celebrity.jpg) no-repeat right;
+	height:540px;
 	padding:0 0 17px;
 }
 .body div#featured h3{
@@ -80,6 +80,12 @@ body{
 	text-align:justify;
 	margin:0;
 }
+.body div#featured textArea{
+    margin:16px 0 0 0px;
+    font-family: sans-serif;
+    font-size:16px;
+    resize: none;
+}
 .body div#featured input{
 	background:url(../images/interface.jpg) no-repeat;
 	border:0;
@@ -94,20 +100,19 @@ body{
 }
 .body ul.blog{
 	list-style:none;
-	margin:40px 0 0;
-	padding:0 0 50px;
+    margin: 40px 0 40px 0;
 	background:url(../images/separator.jpg) no-repeat center top;
-	overflow:hidden;
+	
 }
-.body ul.blog li:first-child{
-	margin:60px 0 0;
-}
+
 .body ul.blog li{
-	float:left;
+	float: left;
 	background:url(../images/interface.jpg) no-repeat 0 -68px !important;
-	margin:60px 0 0 48px;
-	height:400px;
+    border-radius: 5%;
+	margin:20px 0 0 48px;
+	height:300px;
 	padding:0;
+    display: inline;
 }
 .body ul.blog li div{
 	width:281px;
@@ -120,7 +125,8 @@ body{
 }
 .body ul.blog li div a img{
 	border:0;
-	margin:0 0 0 -3px;
+	margin:0 0 0 0;
+    border-radius: 2%;
 }
 .body ul.blog li div a img:hover{
 	filter:alpha(opacity=80);
@@ -128,10 +134,10 @@ body{
 }
 .body ul.blog li div p{
 	width:258px;
-	text-align:justify;
+	text-align:center;
 	color:#828081;
 	font-family: sans-serif;
-	margin:17px 0 0 10px;
+	margin:0px 0 0 0px;
 	line-height:20px;
 	font-size:14px;
 	background:none;
@@ -168,10 +174,7 @@ body{
     padding:0;
 	overflow:hidden;
 }
-.body ul li:first-child{
-	background:none;
-	padding:0 0 30px;
-}
+
 .body ul.paging{
 	margin:15px 0 10px 210px;
 }
@@ -192,15 +195,16 @@ body{
 
 /*------------------------- Footer ------------------------*/ 
 .footer{
-	width:940px;
+	width:1024px;
 	background:url(../images/bg-footer.jpg) no-repeat center top;
 	padding:65px 10px 207px;
 	margin:0 auto;
 	overflow:hidden;
 }
+
 .footer ul{
 	list-style:none;
-	margin:0 0 0 60px;
+	margin:0 0 0 48px;
 	padding:0;
 	overflow:hidden;
 	float:left;
@@ -236,8 +240,8 @@ body{
 	margin:6px 0 0 135px;
 }
 .footer div.connect{
-	float:left;
-	margin:0 0 0 92px;
+	float:right;
+	margin:0 48px 0 0;
 }
 .footer div.connect a{
 	float:left;

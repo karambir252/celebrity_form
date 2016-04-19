@@ -7,6 +7,8 @@
 	<a href="index.php" id="logo"><img src="images/logo.png" alt="logo"/></a>
 	<ul>
 	    <li><a href="index.php">Home</a></li>
+        <li><a href="questions.php">Questions</a></li>
+        <li><a href="upcoming.php">Upcoming</a></li>
 		<li><a href="blog.php">Blog</a></li>
         <li><a href="about.php">About</a></li>
         <li>

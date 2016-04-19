@@ -13,14 +13,21 @@
 			<?php include('header.php') ?>
 			<div class="body">
 				<div id="featured">
+                    <img src="images/next_celebrity.jpg" alt="next celebrity pic" style="border-radius: 50%; float: right" />
 					<h3>Celebrity Name</h3>
 					<p>Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.
 						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.
-						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.
-						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.</p>
+						Write quote of celebirty here.</p>
                     <?php 
                         if(isLoggedIn()){
-					        echo '<input type="button" value="Ask Question" onClick=""/>';
+					        //echo '<input type="button" value="Ask Question" onClick=""/>';
+                     ?>
+                    <form method="post" action="questions.php">
+                        <textarea name="question" rows="10" cols="58" ></textarea>
+                        <br />
+                        <input type="submit" value="Ask Question"/>
+                    </form>
+                    <?php
                         }else{
                             echo '<a href="login.php"><input type="button" value="Log in"/></a>';
                         }
