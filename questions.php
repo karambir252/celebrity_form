@@ -1,8 +1,14 @@
 <?php session_start(); ?>
 
 <?php
+    require_once('dbhelper.php');
+
+    $db = new SqliteDb();
+
     if(isset($_POST['question']) && $_POST['question']){
         $ques = $_POST['question'];
+        $user_id = $_SESSION['user_id'];
+        $db->addQuestion($ques,$db->getNextArrivalId(),$user_id);
     }
 ?>
 
@@ -21,15 +27,13 @@
         <div class="body">
             
             <?php
-                $all_questions = array(
-                                array('question'=>'How Are you?','answer'=>'I am fine.'),
-                                array('question'=>'How Are you?','answer'=>'I am fine.'),
-                                array('question'=>'How Are you?','answer'=>'I am fine.'),
-                                array('question'=>'How Are you?','answer'=>'I am fine.'),
-                                array('question'=>'How Are you?','answer'=>'I am fine.'),
-                            );
+                $db = new SqliteDb();
+                $all_questions = $db->getQuestions($_SESSION['user_id']);
 
-                foreach($all_questions as $question){
+                $num_cols = $all_questions->numColumns();
+
+                for($i = 0 ; $i < $num_cols ; $i = $i+1){
+                    $question = $all_questions->fetchArray();
             ?>
 
             <h3><?php echo $question['question']; ?></h3>
@@ -41,7 +45,10 @@
             
         </div>
 
-        <?php include('footer.php')?>
+        <?php 
+            include('footer.php');
+            $db->close();
+        ?>
     
     </div>
 </body>

@@ -1,10 +1,34 @@
 <?php
     session_start();
 
-    $date = $_POST['arrival_date'];
-    $message = $_POST['message'];
+    if(isset($_POST['message'])){
+        $t = time();
+        $message = $_POST['message'];
 
-    echo 'Your response is submitted: <br />';
-    echo $date . '<br />';
-    echo $message . '<br />';
+        require_once('dbhelper.php');
+        $db = new SqliteDb();
+
+        $db->addArrival($t,0,$message);
+
+        echo 'Your response is submitted: <br />';
+        echo date('d m y',$t) . '<br />';
+        echo $message . '<br />';
+        die();
+    }
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add upcoming</title>
+</head>
+<body>
+    <form action="addUpcoming.php" method="post">
+        <label>Message: </label>
+        <br />
+        <textArea name="message" rows="10" cols="50"></textArea>
+        <br />
+        <input type="submit" value="submit" />
+    </form>
+</body>
+</html>

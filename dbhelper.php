@@ -53,5 +53,14 @@
             }
             return TRUE;
         }
+
+        function getQuestions($user_id){
+            $query = "SELECT * FROM questions WHERE user_id == $user_id";
+            return $this->query($query);
+        }
+
+        function getNextArrivalId(){
+            return 1;
+        }
     }
 ?>

@@ -3,7 +3,7 @@
 <?php
     if(isset($_POST['email']) && $_POST['email'] != ''){
         $_SESSION['loggedin'] = TRUE;
-        $_SESSION['user_id'] = 123;
+        $_SESSION['user_id'] = 7;
         $_SESSION['user_name'] = 'karambir';
         $_SESSION['user_email'] = 'karambir2522@gmail.com';
         header('Location: index.php');

@@ -13,6 +13,8 @@
         <?php include('header.php')?>
 
         <div class="body">
+
+            <!--
             <form style="" action="addUpcoming.php" method="post" >
                 <table>
                     <tr>
@@ -46,7 +48,7 @@
                     </tr>
                 </table>
             </form>
-
+            -->
             <?php
                 $date_format = 'd M Y';
                 $all_arrivals = array(
