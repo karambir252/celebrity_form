@@ -2,6 +2,9 @@
 
 <?php
     
+    $nameerror = $emailerror = $passworderror = $cpassworderror = '';
+    $dpassword = FALSE;
+    
        if ($_SERVER["REQUEST_METHOD"] == "POST") {
    if (empty($_POST["name"])) {
      $nameerror = "Name is required";
@@ -63,8 +66,14 @@
     }
     
     if($dpassword&&$dname) {
+        
+        require_once('dbhelper.php');
+        
+        $db = new SQLiteDb();
+        $id = $db->addUser($name,$email,$_POST['password']);
+        $db->close();
         $_SESSION['loggedin'] = TRUE;
-        $_SESSION['user_id'] = 123;
+        $_SESSION['user_id'] = $id;
         $_SESSION['user_name'] = $name;
         $_SESSION['user_email'] = $email;
         $password=$_POST['password'];
@@ -74,7 +83,6 @@
     }
 ?>
 
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 	<head>

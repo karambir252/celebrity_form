@@ -11,6 +11,13 @@
     <div class="page">
 
         <?php include('header.php')?>
+        <?php
+            require_once('dbhelper.php');
+            $db = new SQLiteDb();
+            
+            $allArrivals = $db->getAllArrivals();
+            $allArrivals->fetchArray();
+        ?>
 
         <div class="body">
 
@@ -49,39 +56,17 @@
                 </table>
             </form>
             -->
-            <?php
-                $date_format = 'd M Y';
-                $all_arrivals = array(
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming'),
-                            array('_id'=> 1 , 'date' => date($date_format) , 'celebrity_id'=> 7 , 'celebrity_name' => 'Michal Jackson' , 'message'=>'Hello I am comming')
-                        );
-            ?>
 
             <ul class="blog">
                 <?php
-                    foreach($all_arrivals as $arrival){
+                    while($arrival = $allArrivals->fetchArray()){
                 ?>
 
                 <li>
                     <div>
-                        <a href="#"><img src="<?php echo 'images/users/'. $arrival['celebrity_id'] .'.jpg' ; ?>" alt="celebrity pic"/></a>
-                        <p>ON : <?php echo $arrival['date'] ?></p>
+                        <a href="<?php echo 'blog.php?arrival_id=' . $arrival['_id'];?>">
+                        <img src="<?php echo 'images/arrival/'. $arrival['_id'] .'.jpg' ; ?>" alt="celebrity pic"/>
+                        </a>
                         <p><?php echo $arrival['message']; ?></p>
                     
                      </div>
@@ -94,6 +79,9 @@
             
         </div>
 
+        <?php
+            $db->close();
+        ?>
         <?php include('footer.php')?>
     
     </div>

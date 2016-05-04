@@ -11,13 +11,18 @@
 	<body>
 		<div class="page">
 			<?php include('header.php') ?>
+            
+            <?php
+                require_once('dbhelper.php');
+                $db = new SQLiteDb();
+                $nextArrivals = $db->getLastFourArrivals();
+                $arrival = $nextArrivals->fetchArray();
+            ?>
 			<div class="body">
 				<div id="featured">
-                    <img src="images/next_celebrity.jpg" alt="next celebrity pic" style="border-radius: 50%; float: right" />
+                    <img src="images/arrival_large/<?php echo $arrival['_id']; ?>.jpg" alt="next celebrity pic" style="border-radius: 50%; float: right" />
 					<h3>Celebrity Name</h3>
-					<p>Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.
-						Write quote of celebirty here.Write quote of celebirty here.Write quote of celebirty here.
-						Write quote of celebirty here.</p>
+					<p><?php echo $arrival['message']; ?></p>
                     <?php 
                         if(isLoggedIn()){
 					        //echo '<input type="button" value="Ask Question" onClick=""/>';
@@ -35,29 +40,23 @@
                     
 				</div>
 				<ul class="blog">
+                    <?php
+                        while($arrival = $nextArrivals->fetchArray()){
+                    ?>
 					<li>
 						<div>
-							<a href="#"><img src="images/cele_1.jpg" alt=""/></a>
-							<p>A message about the celebrity goes here.Put here message about celebrity.
-								A message about the celebrity goes here.Put here message about celebrity.</p>
+							<a href="#"><img src="images/arrival/<?php echo $arrival['_id'];?>.jpg" alt=""/></a>
+							<p><?php echo $arrival['message']; ?></p>
 						</div>
 					</li>
-					<li>
-						<div>
-							<a href="#"><img src="images/cele_2.jpg" alt=""/></a>
-							<p>A message about the celebrity goes here.Put here message about celebrity.
-								A message about the celebrity goes here.Put here message about celebrity.</p>
-						</div>
-					</li>
-					<li>
-						<div>
-							<a href="blog.html"><img src="images/cele_3.jpg" alt=""/></a>
-							<p>A message about the celebrity goes here.Put here message about celebrity.
-								A message about the celebrity goes here.Put here message about celebrity.</p>
-						</div>
-					</li>
+                    <?php
+                        }
+                    ?>
 				</ul>
 			</div>
+            <?php
+                $db->close();
+            ?>
 			<?php include('footer.php') ?>
 		</div>
 	</body>

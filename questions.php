@@ -9,6 +9,7 @@
         $ques = $_POST['question'];
         $user_id = $_SESSION['user_id'];
         $db->addQuestion($ques,$db->getNextArrivalId(),$user_id);
+        
     }
 ?>
 
@@ -27,17 +28,27 @@
         <div class="body">
             
             <?php
-                $db = new SqliteDb();
+                
                 $all_questions = $db->getQuestions($_SESSION['user_id']);
 
-                $num_cols = $all_questions->numColumns();
-
-                for($i = 0 ; $i < $num_cols ; $i = $i+1){
-                    $question = $all_questions->fetchArray();
+                $last_arrival_id = -1;
+                while($question = $all_questions->fetchArray()){
+                    $ai = $question['arrival_id'];
+                    if($last_arrival_id != $ai){
+                        $last_arrival_id = $ai;
             ?>
-
-            <h3><?php echo $question['question']; ?></h3>
-            <p><?php echo $question['answer']; ?></p>
+            
+                    <img class="question_image" alt="celebrity pic" 
+                            src="<?php echo 'images/arrival_small/'. $ai . '.jpg';?>" />
+            
+            <?php
+                    }
+            ?>
+            
+            <div class="question">
+                <h3><?php echo $question['question']; ?></h3>
+                <p><?php echo $question['answer']; ?></p>
+            </div>
 
             <?php
                 }

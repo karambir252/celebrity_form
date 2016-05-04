@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+    require_once('dbhelper.php');
+    $db = new SQLiteDb();
+    
+    if(isset($_GET['arrival_id']) && $_GET['arrival_id']){
+        $arrival_id = $_GET['arrival_id'];
+    }else{
+        $arrival_id = $db->getNextArrivalId();
+    }
+?>
 <!DOCTYPE html>
 
 <html>
@@ -11,36 +21,21 @@
 		<div class="page">
 			<?php include('header.php') ?>
 			<div class="body">
-				<h3>Celebrities will write their experience here</h3>
-				<ul class="paging">
-					<li><a href="#"><<</a></li>
-					<li><a href="#">First</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">7</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">9</a></li>
-					<li><a href="#">10</a></li>
-					<li><a href="#">11</a></li>
-					<li><a href="#">12</a></li>
-					<li><a href="#">13</a></li>
-					<li><a href="#">14</a></li>
-					<li><a href="#">15</a></li>
-					<li><a href="#">16</a></li>
-					<li><a href="#">17</a></li>
-					<li><a href="#">18</a></li>
-					<li><a href="#">19</a></li>
-					<li><a href="#">20</a></li>
-					<li><a href="#">21</a></li>
-					<li><a href="#">Last</a></li>
-					<li><a href="#">>></a></li>
-				</ul>
+                <img src="<?php echo 'images/arrival/'. $arrival_id . '.jpg'; ?>" />
+				<?php
+                    $allQuestions = $db->getAllQuestions($arrival_id);
+                    while($question = $allQuestions->fetchArray()){
+                ?>
+                    <h3><?php echo $question['question']; ?></h3>
+                    <p><?php echo $question['answer']; ?></p>
+                <?php
+                    }
+                ?>
 			</div>
-			<?php include('footer.php') ?>
+			<?php 
+                include('footer.php');
+                $db->close();
+            ?>
 		</div>
 	</body>
 </html>  

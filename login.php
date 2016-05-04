@@ -1,17 +1,32 @@
 <?php session_start(); ?>
 
 <?php
+    $login_error = '';
     if(isset($_POST['email']) && $_POST['email'] != ''){
-        $_SESSION['loggedin'] = TRUE;
-        $_SESSION['user_id'] = 7;
-        $_SESSION['user_name'] = 'karambir';
-        $_SESSION['user_email'] = 'karambir2522@gmail.com';
-        header('Location: index.php');
-        die();
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        
+        require_once('dbhelper.php');
+        $db = new SQLiteDb();
+        $result = $db->hasUser($email,$password);
+        
+        if($data = $result->fetchArray()){
+            $_SESSION['loggedin'] = TRUE;
+            $_SESSION['user_id'] = $data['_id'];
+            $_SESSION['user_name'] = $data['name'];
+            $_SESSION['user_email'] = $data['email'];
+            
+            $db->close();
+            header('Location: index.php');
+            die();
+        }else{
+            $login_error = 'Incorrect username or password';
+        }
+        
+        $db->close();
     }
 ?>
 
-<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -43,6 +58,10 @@
              <a href="SIGNUP.PHP"> SIGN-UP</a>
               </font>
           </td>
+      </tr>
+      
+      <tr>
+        <td colspan="2"><?php echo $login_error ?></td>
       </tr>
                      </table>
     </form>
