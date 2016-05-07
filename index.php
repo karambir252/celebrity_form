@@ -1,4 +1,3 @@
-
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +44,8 @@
                     ?>
 					<li>
 						<div>
-							<a href="#"><img src="images/arrival/<?php echo $arrival['_id'];?>.jpg" alt=""/></a>
+							<a href="<?php echo 'blog.php?arrival_id=' . $arrival['_id']; ?>">
+                                <img src="images/arrival/<?php echo $arrival['_id'];?>.jpg" alt=""/></a>
 							<p><?php echo $arrival['message']; ?></p>
 						</div>
 					</li>

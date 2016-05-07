@@ -92,7 +92,10 @@
 		
 	</head>
 	<body>
+    <div class="page">
 					<?php include('header.php') ?>
+                    
+     <div class="body">
      
         <div style="width: 400px; margin: auto;"  >
           <table style="font-size: 20px ">
@@ -109,7 +112,10 @@
            </form>
               </table>
        </div>
+       </div>
             <?php include('footer.php') ?>
+            
+       </div>
 
 </body>
 </html>

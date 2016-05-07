@@ -36,8 +36,11 @@
 		
 	</head>
 	<body>
+    
+    <div class="page">
 		
 			<?php include('header.php') ?>
+   <div class="body">
        
         <div style="width: 200px; margin: auto;"  >
                 <form method="post" action="login.php">
@@ -66,8 +69,12 @@
                      </table>
     </form>
             </div>
+            
+    </div>
            
             <?php include('footer.php') ?>
+            
+    </div>
 
 </body>
 </html>
