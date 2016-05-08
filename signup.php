@@ -87,35 +87,69 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<title>Celebrity Form</title>
-		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		<title>Sign Up</title>
+		<link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
 		
 	</head>
 	<body>
-    <div class="page">
-					<?php include('header.php') ?>
+    
+	<?php include('header.php') ?>
                     
-     <div class="body">
+     <div class="wrapper style2" style="padding-left: 6em; padding-right: 6em;">
+                <section class="container" style="padding-left: 20em; padding-right: 20em;">
+                    <form method="post" action="signup.php">
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>User Name:</h3>
+                            </td>
+                            <td>
+                                <input type="text"  name="name"  />
+                                <span style="color: #f00"><?php echo $nameerror ;?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Email:</h3>
+                            </td>
+                            <td>
+                                <input type="text"  name="email"  />
+                                <span style="color: #f00"><?php echo $emailerror ;?></span>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <h3>Password:</h3>
+                            </td>
+                            <td>
+                                <input type="password" name="password" />
+                                <span style="color: #f00"><?php echo $passworderror ;?></span>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <h3>Confirm Password:</h3>
+                            </td>
+                            <td>
+                                <input type="password" name="cpassword" /> 
+                                <span style="color: #f00"><?php echo $cpassworderror ;?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" >
+                                <div style="margin-top: 1em;">
+                                <input type="submit" value="Sign Up" style="width: 100%;"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                </section>
+            </div>
+                    
      
-        <div style="width: 400px; margin: auto;"  >
-          <table style="font-size: 20px ">
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-          <tr><td> USER  NAME</td><td> <input type="text" name="name" value="USER NAME" ></td></tr>
-                        <span style="color: #f00"><?php echo $nameerror ;?></span>
-            <tr><td>      EMAIL ID</td><td><input type="email" name="email" value="EMAIL"></td>
-                       <span style="color: #f00"><?php echo $emailerror ;?></span>
-        <tr><td> PASSWORD</td><td><input type="password" name="password" value="MUST BE 8 DIGIT"></td></tr>
-                       <span style="color: #f00"><?php echo $passworderror ;?></span>
-            <tr><td>   CONFIRM PASSWORD</td><td><input type="password" name="cpassword" value="RE-ENTER PASSWORD"></td></tr>
-                           <span style="color: #f00"><?php echo $cpassworderror ;?></span>
-               <tr><td> <input type="SUBMIT" value="SUBMIT" ></td></tr>
-           </form>
-              </table>
-       </div>
-       </div>
-            <?php include('footer.php') ?>
-            
-       </div>
+     <?php include('footer.php') ?>        
 
 </body>
 </html>

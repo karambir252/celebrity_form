@@ -36,8 +36,8 @@
             return TRUE;
         }
 
-        function addArrival($arrival_date,$celebrity_id,$message){
-            $insert = "INSERT INTO arrival(date,celebrity_id,message) VALUES($arrival_date,$celebrity_id,'$message')";
+        function addArrival($arrival_date,$celebrity_id,$message,$celebrity_name){
+            $insert = "INSERT INTO arrival(date,celebrity_id,message,celebrity_name) VALUES($arrival_date,$celebrity_id,'$message','$celebrity_name')";
             $result = $this->exec($insert);
             if(!$result){
                 echo $this->lastErrorMsg();
@@ -60,6 +60,15 @@
             $query = "SELECT * FROM questions WHERE user_id == $user_id ORDER BY arrival_id DESC , _id DESC";
             return $this->query($query);
         }
+        
+        function getArrival($arrival_id){
+            $query = "SELECT * FROM arrival WHERE _id == $arrival_id";
+            $result = $this->query($query);
+            if(!$result){
+                echo $this->lastErrorMsg();
+            }
+            return $result->fetchArray();
+        }
 
         function getNextArrival(){
             $query = 'SELECT * FROM arrival ORDER BY _id DESC LIMIT 1';
@@ -67,8 +76,8 @@
             return $result->fetchArray();
         }
         
-        function getLastFourArrivals(){
-            $query = 'SELECT * FROM arrival ORDER BY _id DESC LIMIT 4';
+        function getLastFiveArrivals(){
+            $query = 'SELECT * FROM arrival ORDER BY _id DESC LIMIT 5';
             $result = $this->query($query);
             return $result;
         }
@@ -108,6 +117,101 @@
                 echo $this->lastErrorMsg();
             }
             return $result;
+        }
+        
+        function getAllAskedQuestions($arrival_id,$user_id){
+            $query = "SELECT * FROM questions WHERE arrival_id == $arrival_id and user_id == $user_id ORDER BY _id DESC";
+            $result = $this->query($query);
+            if(!$result){
+                echo $this->lastErrorMsg();
+            }
+            return $result;
+        }
+        
+        function getTopLikedNineQuestions(){
+            $arrivalId = $this->getNextArrivalId();
+            $query = "SELECT * FROM questions WHERE answer is not NULL and arrival_id = $arrivalId ORDER BY likes DESC LIMIT 9";
+            $result = $this->query($query);
+            if(!$result){
+                echo $this->lastErrorMsg();
+            }
+            return $result;
+        }
+        
+        function isUserLiked($user_id,$question_id){
+            $query = "SELECT * FROM user_likes WHERE user_id == $user_id and question_id == $question_id";
+            $result = $this->query($query);
+            if(!$result){
+                echo $this->lastErrorMsg();
+                return FALSE;
+            }
+            
+            if($result->fetchArray()){
+                return TRUE;
+            }
+            return FALSE;
+        }
+        
+        function setUserLike($user_id,$question_id){
+            if($this->isUserLiked($user_id,$question_id)){
+                die('user already liked: ' . $question_id . '   user: ' . $user_id);
+            }
+            
+            $query = "SELECT * FROM questions WHERE _id == $question_id";
+            $result = $this->query($query);
+            if(!$result){
+                echo $this->lastErrorMsg();
+                return FALSE;
+            }
+            
+            $likes = $result->fetchArray()['likes']+1;
+            
+            
+            $insert = "INSERT INTO user_likes(user_id,question_id) VALUES($user_id,$question_id)";
+            $update = "UPDATE questions SET likes = $likes WHERE _id == $question_id";
+            
+            if(!$this->exec($insert)){
+                echo $this->lastErrorMsg();
+                return FALSE;
+            }
+            
+            if(!$this->exec($update)){
+                echo $this->lastErrorMsg();
+                return FALSE;
+            }
+            
+            return TRUE;
+        }
+        
+        function unsertUserLike($user_id,$question_id){
+            if(!$this->isUserLiked($user_id,$question_id)){
+                die('user not like: ' . $question_id . '   user: ' . $user_id);
+            }
+            
+            $query = "SELECT * FROM questions WHERE _id == $question_id";
+            $result = $this->query($query);
+            if(!$result){
+                echo $this->lastErrorMsg();
+                return FALSE;
+            }
+            
+            $likes = $result->fetchArray()['likes']-1;
+            
+            
+            $insert = "DELETE FROM user_likes WHERE user_id == $user_id and question_id == $question_id";
+            $update = "UPDATE questions SET likes = $likes WHERE _id == $question_id";
+            
+            if(!$this->exec($insert)){
+                echo $this->lastErrorMsg();
+                return FALSE;
+            }
+            
+            if(!$this->exec($update)){
+                echo $this->lastErrorMsg();
+                return FALSE;
+            }
+            
+            return TRUE;
         }
     }
 ?>

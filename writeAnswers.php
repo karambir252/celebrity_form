@@ -19,15 +19,16 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Questions</title>
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <title>Write Answers</title>
+    <link rel="stylesheet" href="css/skel.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-    <div class="page">
+<body class="homepage">
+    
 
         <?php include('header.php')?>
 
-        <div class="body">
+        
             
             <?php
                 $question = $db->getSingleQuestion();
@@ -37,16 +38,34 @@
                 }else{
             ?>
             
-                <form action="writeAnswers.php" method="post">
-                    <?php echo '<h3>' . $question['question'] . '</h3>'; ?>
-                    <textarea name="answer" rows="10" cols="50"></textarea> <br />
-                    <input type="hidden" name="question_id" value="<?php echo $question['_id']; ?>" />
-                    <input type="submit" value="submit" />
+            <div class="wrapper style2" style="padding-left: 6em; padding-right: 6em;">
+                <section class="container">
+                    <form method="post" action="writeAnswers.php">
+                    <table>
+                        <tr>
+                            <td>
+                                <?php echo '<h3>' . $question['question'] . '</h3>'; ?>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td>
+                                <textarea rows="8" cols="25" name="answer"></textarea>
+                                <input type="hidden" name="question_id" value="<?php echo $question['_id']; ?>" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" value="Submit Answer" style="width: 100%;"/>
+                            </td>
+                        </tr>
+                    </table>
                 </form>
+                </section>
+            </div>
             
             <?php } ?>
             
-        </div>
+        
 
         <?php 
             include('footer.php');
