@@ -2,16 +2,21 @@
 
 <?php
     
-    $nameerror = $emailerror = $passworderror = $cpassworderror = '';
-    $dpassword = FALSE;
+    $nameerror = $emailerror = $passworderror = $cpassworderror = $profile_pic_error = '';
+    $dpassword = $dname = $dprofile_pic = FALSE;
     
        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   if (empty($_POST["name"])) {
+   if (empty($_POST["first_name"])) {
      $nameerror = "Name is required";
      $dname=FALSE;
       }
     else {
-     $name = test_input($_POST["name"]);
+     $name = test_input($_POST['first_name']);
+     
+     if(isset($_POST['last_name'])){
+        $name = $name . $_POST['last_name'];
+     }
+     
      // check if name only contains letters and whitespace
      $dname=TRUE;
      if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
@@ -55,8 +60,30 @@
             $dpassword=TRUE;    
             }
         }
+        
+        if($_FILES['profile_pic']['error']> 0){
+        switch($_FILES['profile_pic']['error']){
+            case 1:  $profile_pic_error = 'File exceeded upload_max_filesize'; 
+                    break;
+            case 2:  $profile_pic_error =  'File exceeded max_file_size'; break; 
+            case 3:  $profile_pic_error =  'File only partially uploaded'; break; 
+            case 4:  $profile_pic_error =  'No file uploaded'; break;
+            case 6:  $profile_pic_error =  'Cannot upload file: No temp directory specified';
+                    break;
+            case 7:  $profile_pic_error =  'Upload failed: Cannot write to disk';
+                    break;
 
-    }    
+        }
+    }
+    
+    if(!is_uploaded_file($_FILES['profile_pic']['tmp_name'])){
+        $profile_pic_error = 'Please upload profile pic';
+    }else{
+        $dprofile_pic = TRUE;
+    }
+
+    }
+    
     function test_input($data)
     {
         $data = trim($data);
@@ -65,7 +92,7 @@
         return $data;
     }
     
-    if($dpassword&&$dname) {
+    if($dpassword&&$dname && $dprofile_pic) {
         
         require_once('dbhelper.php');
         
@@ -77,6 +104,8 @@
         $_SESSION['user_name'] = $name;
         $_SESSION['user_email'] = $email;
         $password=$_POST['password'];
+        
+        move_uploaded_file($_FILES['profile_pic']['tmp_name'],'images/users/' . $id . '.jpg');
       
         header('Location: index.php');
         die();
@@ -98,15 +127,23 @@
                     
      <div class="wrapper style2" style="padding-left: 6em; padding-right: 6em;">
                 <section class="container" style="padding-left: 20em; padding-right: 20em;">
-                    <form method="post" action="signup.php">
+                    <form method="post" action="signup.php" enctype="multipart/form-data">
                     <table>
                         <tr>
                             <td>
-                                <h3>User Name:</h3>
+                                <h3>First Name:</h3>
                             </td>
                             <td>
-                                <input type="text"  name="name"  />
+                                <input type="text"  name="first_name"  />
                                 <span style="color: #f00"><?php echo $nameerror ;?></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Last Name:</h3>
+                            </td>
+                            <td>
+                                <input type="text"  name="last_name"  />
                             </td>
                         </tr>
                         <tr>
@@ -134,6 +171,16 @@
                             <td>
                                 <input type="password" name="cpassword" /> 
                                 <span style="color: #f00"><?php echo $cpassworderror ;?></span>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <h3>Profile Pic:</h3>
+                            </td>
+                            <td>
+                                <input type="file"  name="profile_pic"  id="profile_pic"/>
+                                <span style="color: #f00"><?php echo $profile_pic_error ;?></span>
                             </td>
                         </tr>
                         <tr>

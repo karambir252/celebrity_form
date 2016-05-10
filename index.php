@@ -79,7 +79,6 @@
 				<section class="container">
 					<header class="major">
 						<h2>Your Favourite Questions</h2>
-						<!--<span class="byline">pulvinar mollis. Vestibulum sem magna, elementum vestibulum arcu.</span>-->
 					</header>
                     <div class="row flush">
                         <script>

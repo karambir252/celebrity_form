@@ -18,10 +18,10 @@
 					<h2>Connect with us</h2>
 				</header>
 				<ul class="icons">
-					<li class="active"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
-					<li><a href="#" class="fa fa-twitter"><span>Twitter</span></a></li>
-					<li><a href="#" class="fa fa-dribbble"><span>Pinterest</span></a></li>
-					<li><a href="#" class="fa fa-google-plus"><span>Google+</span></a></li>
+					<li><a href="http://www.facebook.com" class="fa fa-facebook" target="_blank"><span>Facebook</span></a></li>
+					<li><a href="http://www.twitter.com" class="fa fa-twitter" target="_blank"><span>Twitter</span></a></li>
+					<li><a href="http://www.pintrest.com" class="fa fa-dribbble" target="_blank"><span>Pinterest</span></a></li>
+					<li><a href="http://www.google.com" class="fa fa-google-plus" target="_blank"><span>Google+</span></a></li>
 				</ul>
 				<hr />
 			</section>
